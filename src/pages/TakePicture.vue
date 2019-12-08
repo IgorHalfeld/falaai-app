@@ -20,6 +20,17 @@
           round
           @click="() => take()"
         />
+        <div class="flex items-center q-ml-md">
+          <q-btn
+            push
+            class="shadow-7"
+            icon="flip_camera_ios"
+            color="grey"
+            size="md"
+            round
+            @click="() => flipCamera()"
+          />
+        </div>
       </div>
       <p class="text-body2 text-center text-uppercase text-grey-3 q-ma-none q-mt-md">
         Firar foto
