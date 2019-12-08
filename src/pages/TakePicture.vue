@@ -13,14 +13,14 @@
       <div class="row justify-center">
         <q-btn
           push
-          class="shadow-7"
+          class="shadow-7 q-ml-xl"
           icon="camera_alt"
           color="green"
           size="lg"
           round
           @click="() => take()"
         />
-        <div class="flex items-center q-ml-md">
+        <div class="flex items-center q-ml-sm">
           <q-btn
             push
             class="shadow-7"
@@ -33,7 +33,7 @@
         </div>
       </div>
       <p class="text-body2 text-center text-uppercase text-grey-3 q-ma-none q-mt-md">
-        Firar foto
+        Tirar foto
       </p>
     </div>
   </q-page>
@@ -76,6 +76,7 @@ export default {
     },
     flipCamera() {
       this.hasCameraActive = false;
+      this.$q.loading.show();
       const index = this.cameraIds.indexOf(this.deviceId);
       if (index) {
         const [device] = this.cameraIds;
@@ -84,14 +85,10 @@ export default {
         const [, device] = this.cameraIds;
         this.deviceId = device;
       }
-      this.hasError = {
-        status: true,
-        message: 'Loading...',
-      };
 
       setTimeout(() => {
         this.hasCameraActive = true;
-        this.hasError.status = false;
+        this.$q.loading.hide();
       }, 1000);
     },
     logErrors(error) {
