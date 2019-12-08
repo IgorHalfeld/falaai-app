@@ -1,5 +1,5 @@
 <template>
-  <q-page class="fit column items-center justify-center bg-dark q-pa-xl">
+  <q-page class="fit column items-center justify-center bg-dark q-py-xl">
     <div class="full-width row justify-center">
       <img src="~assets/logo.png" style="width: 187.5px; height: 70.81px" />
     </div>
