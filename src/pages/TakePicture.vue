@@ -25,7 +25,7 @@
       <q-btn
         push
         class="shadow-7"
-        icon="done"
+        icon="check_circle"
         color="green"
         size="xl"
         round
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { WebCam } from 'vue-web-cam';
 
 export default {
@@ -82,7 +83,17 @@ export default {
     cameraAlreadyLoaded: false,
     hasCameraActive: true,
   }),
+  mounted() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { longitude, latitude } = position.coords;
+      this.setCoords({
+        lat: latitude,
+        lon: longitude,
+      });
+    });
+  },
   methods: {
+    ...mapActions(['setImageUrl', 'setCoords']),
     loadCameraIds(devices) {
       if (this.deviceId && this.deviceId.length) {
         this.$refs.camera.start();
@@ -124,10 +135,12 @@ export default {
       const response = await fetch(this.picture);
       const blob = await response.blob();
 
-      imagesRef.put(blob).then((snapshot) => {
-        console.log('Uploaded a blob or file!', snapshot);
+      imagesRef.put(blob).then(async (snapshot) => {
+        console.log('Uploaded a blob or file!');
+        this.setImageUrl(await snapshot.ref.getDownloadURL());
         this.picture = null;
         this.$q.loading.hide();
+        this.$router.push({ name: 'Issue' });
       });
     },
     take() {

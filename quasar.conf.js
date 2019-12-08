@@ -50,6 +50,8 @@ module.exports = function main(ctx) {
       // Quasar plugins
       plugins: [
         'Loading',
+        'Dialog',
+        'Notify',
       ],
     },
 

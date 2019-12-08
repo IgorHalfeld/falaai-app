@@ -12,13 +12,43 @@ Vue.use(Vuex);
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    modules: {
-      // example
+    state: {
+      description: '',
+      type: '',
+      imageUrl: '',
+      coords: {
+        lat: null,
+        lon: null,
+      },
     },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode only
-    strict: process.env.DEV,
+    actions: {
+      setImageUrl({ commit }, payload) {
+        commit('SET_IMAGE_URL', payload);
+      },
+      setDescription({ commit }, payload) {
+        commit('SET_DESC', payload);
+      },
+      setType({ commit }, payload) {
+        commit('SET_TYPE', payload);
+      },
+      setCoords({ commit }, payload) {
+        commit('SET_COORDS', payload);
+      },
+    },
+    mutations: {
+      SET_DESC: (state, payload) => {
+        state.description = payload;
+      },
+      SET_IMAGE_URL: (state, payload) => {
+        state.imageUrl = payload;
+      },
+      SET_TYPE: (state, payload) => {
+        state.type = payload;
+      },
+      SET_COORDS: (state, payload) => {
+        state.coords = payload;
+      },
+    },
   });
 
   return Store;

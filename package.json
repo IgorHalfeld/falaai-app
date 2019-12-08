@@ -15,6 +15,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "fingerprintjs": "^0.5.3",
     "firebase": "^7.5.2",
     "quasar": "^1.0.0",
     "vue-web-cam": "^1.9.0",
