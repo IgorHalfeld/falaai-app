@@ -9,7 +9,7 @@
       @error="logErrors"
       @cameras="loadCameraIds"
       :deviceId="deviceId"  />
-    <div class="column items-center q-mt-xl">
+    <div class="column items-center q-mt-lg">
       <div class="row justify-center">
         <q-btn
           push
