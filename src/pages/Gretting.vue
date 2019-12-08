@@ -1,13 +1,13 @@
 <template>
-  <q-page class="fit column items-center justify-center bg-dark">
+  <q-page class="fit column items-center justify-center bg-dark q-py-xl">
     <div class="full-width row justify-center">
-      <img src="~assets/logo.png" style="width: 50%" />
+      <img src="~assets/logo.png" style="width: 187.5px; height: 70.81px" />
     </div>
     <div class="column q-mt-xl q-pa-md rounded-borders" style="background-color: #111">
       <div class="column q-my-sm" v-for="(card, index) in cards" :key="`card-${index}`">
         <div class="row items-center">
           <div class="q-mr-md">
-            <q-icon :name="card.icon" size="50px" color="white" />
+            <img :src="`/statics/${card.image}.png`" width="50">
           </div>
           <div>
             <p class="text-body1 text-uppercase text-family-bold text-grey-3 q-ma-none">
@@ -22,6 +22,8 @@
     <div class="column items-center q-mt-xl">
       <div class="row justify-center">
         <q-btn
+          push
+          class="shadow-7"
           icon="warning"
           color="red"
           size="lg"
@@ -42,22 +44,22 @@ export default {
   data: () => ({
     cards: [
       {
-        icon: 'account_circle',
+        image: '1',
         title: 'A denuncia é anônima',
         caption: 'Sua identidade é preservada!',
       },
       {
-        icon: 'account_circle',
+        image: '2',
         title: 'Você salvando vidas',
         caption: 'E protejendo a natureza!',
       },
       {
-        icon: 'account_circle',
+        image: '3',
         title: 'Ajude a comunidade',
         caption: 'E mantenha a saúde do porto!',
       },
       {
-        icon: 'account_circle',
+        image: '4',
         title: 'Evite fake news',
         caption: 'É a sua vida que esta em jogo!',
       },

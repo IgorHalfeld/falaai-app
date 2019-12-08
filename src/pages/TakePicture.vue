@@ -1,7 +1,7 @@
 <template>
-  <q-page class="fit column items-center justify-center bg-dark">
+  <q-page class="fit column items-center justify-center bg-dark q-pa-xl">
     <div class="full-width row justify-center">
-      <img src="~assets/logo.png" style="width: 50%" />
+      <img src="~assets/logo.png" style="width: 187.5px; height: 70.81px" />
     </div>
     <WebCam
       ref="camera"
@@ -12,6 +12,8 @@
     <div class="column items-center q-mt-xl">
       <div class="row justify-center">
         <q-btn
+          push
+          class="shadow-7"
           icon="camera_alt"
           color="green"
           size="lg"
