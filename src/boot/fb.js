@@ -4,6 +4,7 @@ import configs from '../utils/firebase.json';
 
 const app = firebase.initializeApp({
   databaseURL: 'https://fala-ai-portohacksantos.firebaseio.com',
+  storageBucket: 'gs://fala-ai-portohacksantos.appspot.com',
   ...configs,
 });
 

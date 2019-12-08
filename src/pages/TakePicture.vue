@@ -1,15 +1,38 @@
 <template>
   <q-page class="fit column items-center justify-center bg-dark q-py-xl">
-    <div class="full-width row justify-center">
+    <div class="full-width row justify-center q-mb-lg">
       <img src="~assets/logo.png" style="width: 187.5px; height: 70.81px" />
     </div>
+    <q-img v-if="picture" :src="picture" />
     <WebCam
+      v-else
       ref="camera"
       @stopped="logErrors"
       @error="logErrors"
       @cameras="loadCameraIds"
       :deviceId="deviceId"  />
-    <div class="column items-center q-mt-lg">
+
+    <div class="full-width row justify-around items-center q-mt-lg" v-if="picture">
+      <q-btn
+        push
+        class="shadow-7"
+        icon="close"
+        color="red"
+        size="xl"
+        round
+        @click="() => picture = null"
+      />
+      <q-btn
+        push
+        class="shadow-7"
+        icon="done"
+        color="green"
+        size="xl"
+        round
+        @click="() => upload()"
+      />
+    </div>
+    <div v-else class="column items-center q-mt-lg">
       <div class="row justify-center">
         <q-btn
           push
@@ -52,12 +75,8 @@ export default {
       innerWidth: window.innerWidth,
       innerHeight: window.innerHeight,
     },
+    picture: null,
     deviceId: null,
-    wsConnection: null,
-    hasError: {
-      status: false,
-      message: '',
-    },
     cameraIds: [],
     isActive: true,
     cameraAlreadyLoaded: false,
@@ -76,7 +95,9 @@ export default {
     },
     flipCamera() {
       this.hasCameraActive = false;
-      this.$q.loading.show();
+      this.$q.loading.show({
+        message: 'Trocando a camera...',
+      });
       const index = this.cameraIds.indexOf(this.deviceId);
       if (index) {
         const [device] = this.cameraIds;
@@ -93,16 +114,27 @@ export default {
     },
     logErrors(error) {
       console.log('* Error', error); // eslint-disable-line
-      this.hasError = {
-        status: true,
-        message: 'Your browser doesn\'t supports GetUserMedia 😱',
-      };
+    },
+    async upload() {
+      this.$q.loading.show({
+        message: 'Fazendo upload...',
+      });
+      const ref = this.$fb.storage().ref();
+      const imagesRef = ref.child(`${Date.now()}.jpg`);
+      const response = await fetch(this.picture);
+      const blob = await response.blob();
+
+      imagesRef.put(blob).then((snapshot) => {
+        console.log('Uploaded a blob or file!', snapshot);
+        this.picture = null;
+        this.$q.loading.hide();
+      });
     },
     take() {
       this.isActive = false;
       this.$nextTick(() => {
         const photo = this.$refs.camera.capture();
-        console.log('photo', photo);
+        this.picture = photo;
         setTimeout(() => {
           this.isActive = true;
           this.overlay = false;
