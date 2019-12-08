@@ -26,7 +26,7 @@
           class="shadow-7"
           icon="warning"
           color="red"
-          size="lg"
+          size="xl"
           round
           @click="() => $router.push({ name: 'Take' })"
         />

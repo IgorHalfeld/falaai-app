@@ -16,7 +16,7 @@
           class="shadow-7 q-ml-xl"
           icon="camera_alt"
           color="green"
-          size="lg"
+          size="xl"
           round
           @click="() => take()"
         />
