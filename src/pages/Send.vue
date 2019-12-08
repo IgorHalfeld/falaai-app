@@ -85,6 +85,9 @@ export default {
   methods: {
     ...mapActions(['setDescription']),
     async send() {
+      this.$q.loading.show({
+        message: 'Enviando...',
+      });
       const response = await this.$s.alert.create({
         ...this.state,
         type: this.state.type.value,
@@ -95,6 +98,7 @@ export default {
           this.$router.push({ name: 'Gretting' });
         }, 500);
       }
+      this.$q.loading.hide();
     },
   },
 };
