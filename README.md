@@ -1,4 +1,4 @@
-# Quasar App (falaai-bo)
+# Quasar App (falaai-app)
 
 A Quasar Framework app
 
