@@ -90,6 +90,7 @@ export default {
       });
       const response = await this.$s.alert.create({
         ...this.state,
+        description: this.text.trim(),
         type: this.state.type.value,
       });
       if (response.status === 200) {
